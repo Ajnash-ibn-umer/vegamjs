@@ -1,7 +1,22 @@
-import  app from "../dist/index.mjs"
+import app from "../dist/index.mjs";
 
-const s=app()
-s.listen(8001)
-s.get("/url",(req,res)=>{
-    res.end("wow")
-})
+const s = new app({
+  routerOptions: {
+    onBadUrl: (path, req, res) => {
+      res.statusCode = 400;
+      res.end(`Bad path: ${path}`);
+    },
+  },
+});
+
+s.listen(8001, () => {
+  console.log("port running");
+});
+s.get("/test", ({ req, res }) => {
+  console.log({ query: req.query });
+  res.end("hai");
+});
+s.get("/query", ({ req, res }) => {
+  console.log({ query: req.query });
+  res.end("haiii");
+});

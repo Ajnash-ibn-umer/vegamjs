@@ -1,56 +1,108 @@
+import EventEmitter from "events";
 import * as http from "http";
-import Route from "route-parser";
-/**
- * 
- *routetable stracture
- {
-  "/path":{
-    get:(req,res) => {
+import findMyWay, { Handler, HTTPVersion } from "find-my-way";
+import { supportedMethods } from "./utils/httpMethods";
+import { AppConfig } from "./types/router";
+import { Context, RouterHandler } from "./types";
+import readBody from "./body";
+import bodyParser from "./body-parser";
 
-    }
+type ListenArgs = any[];
+
+class createApplication extends EventEmitter {
+  private readonly app: any;
+  private router: findMyWay.Instance<findMyWay.HTTPVersion.V1>;
+  constructor(options: AppConfig) {
+    super();
+    this.router =
+      options != undefined
+        ? findMyWay(options.routerOptions)
+        : findMyWay({
+            ignoreDuplicateSlashes: true,
+          });
+
+    this.app = http.createServer(async (_req: any, _res) => {
+     
+      bodyParser.call(this, _req, _res as any,()=>{
+        console.log("testing body", _req.body);
+        const resp = this.router.lookup(_req, _res);
+      });
+
+
+    });
   }
- }
- */
-
-function createApplication() {
-  let app: http.Server;
-  const routesTables: Record<string, any> = {};
-  function registerPath(
-    path: string,
-    cb: Function,
-    method: string,
-    middleware?: Function
-  ) {
-    if (!routesTables[path]) {
-      routesTables[path] = {};
-    }
-    routesTables[path] = {
-      ...routesTables[path],
-      [method]: cb,
-      [method + "-middleware"]: middleware,
-    };
+  listen(port: number, ...args: ListenArgs) {
+    this.app.listen(port, ...args);
   }
-  app = http.createServer(async (_req, _res) => {
-    console.log(_req.url);
 
-    if (_req.url) {
-      const route: any = new Route(myRoute);
-      const parsed = route.match(_req.url);
-      console.log({ parsed });
-
-      if (parsed && routesTables[parsed.spec]) {
-        console.log("url matches");
+  // method handlers
+  get(path: string, handler: RouterHandler) {
+    this.router.on(
+      supportedMethods.get,
+      path,
+      (req: any, res, params, store, searchParams) => {
+        req["params"] = params;
+        req["query"] = Object.assign({}, searchParams);
+        handler({ req, res });
       }
-    }
-  });
+    );
+  }
+  post(path: string, handler: RouterHandler) {
+    this.router.on(
+      supportedMethods.post,
+      path,
+      (req: any, res, params, store, searchParams) => {
+        req["params"] = params;
+        req["query"] = Object.assign({}, searchParams);
+        handler({ req, res });
+      }
+    );
+  }
 
-  return {
-    get: (path: string, cb: Function) => registerPath(path, cb, "get"),
-
-    listen: (...args: any[]) => {
-      app.listen(...args);
-    },
-  };
+  put(path: string, handler: RouterHandler) {
+    this.router.on(
+      supportedMethods.put,
+      path,
+      (req: any, res, params, store, searchParams) => {
+        req["params"] = params;
+        req["query"] = Object.assign({}, searchParams);
+        handler({ req, res });
+      }
+    );
+  }
+  delete(path: string, handler: RouterHandler) {
+    this.router.on(
+      supportedMethods.delete,
+      path,
+      (req: any, res, params, store, searchParams) => {
+        req["params"] = params;
+        req["query"] = Object.assign({}, searchParams);
+        handler({ req, res });
+      }
+    );
+  }
+  patch(path: string, handler: RouterHandler) {
+    this.router.on(
+      supportedMethods.patch,
+      path,
+      (req: any, res, params, store, searchParams) => {
+        req["params"] = params;
+        req["query"] = Object.assign({}, searchParams);
+        handler({ req, res });
+      }
+    );
+  }
+  head(path: string, handler: RouterHandler) {
+    this.router.on(
+      supportedMethods.head,
+      path,
+      (req: any, res, params, store, searchParams) => {
+        req["params"] = params;
+        req["query"] = Object.assign({}, searchParams);
+        handler({ req, res });
+      }
+    );
+  }
 }
 
 export default createApplication;
