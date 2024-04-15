@@ -1,5 +1,5 @@
 {
-  "name": "ajn.js",
+  "name": "ajn-js",
   "version": "1.0.1",
   "description": "lightweight node.js framework",
   "main": "./dist/index.js",
