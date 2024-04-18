@@ -3,9 +3,9 @@
 
   Simple, minimalist web framework for [Node.js](http://nodejs.org).
 
-  [![NPM Version][npm-version-image]][npm-url]
+  <!-- [![NPM Version][npm-version-image]][npm-url]
   [![NPM Install Size][npm-install-size-image]][npm-install-size-url]
-  [![NPM Downloads][npm-downloads-image]][npm-downloads-url]
+  [![NPM Downloads][npm-downloads-image]][npm-downloads-url] -->
 
 ```js
 import  AJN from "ajn-js" 
