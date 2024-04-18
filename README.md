@@ -14,13 +14,11 @@ import  AJN from "ajn-js"
 const app=new AJN()
 
 app.listen(8000,()=>{
-    console.log("listening")
+    res.text("hello world")
 })
 
 app.get("/",({req,res})=>{
-res.end("hello world!")
 
-})
 ```
 
 ## Installation
