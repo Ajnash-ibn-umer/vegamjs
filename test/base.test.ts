@@ -1,4 +1,4 @@
-import createApplication from "../src";
+import createApplication from "../src/server";
 
 test('create application', () => {
     const app = createApplication()
