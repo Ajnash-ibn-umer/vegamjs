@@ -1,8 +1,8 @@
 {
   "name": "ajn-js",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "lightweight node.js framework",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "type": "module",
