@@ -9,6 +9,7 @@
   ### Quick Start
 
 ```js
+
 import  AJN from "ajn-js" 
 
 const app=new AJN()
@@ -18,9 +19,11 @@ app.listen(8000,()=>{
 })
 
 app.get("/",({req,res})=>{
-res.end("hello world!")
+res.text("hello world!")
 
 })
+
+
 ```
 
 ## Installation
