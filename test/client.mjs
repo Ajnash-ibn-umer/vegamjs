@@ -1,4 +1,4 @@
-import app from "../dist/index.mjs";
+import * as  app from "../dist/index.js";
 
 const s = new app({
   routerOptions: {
