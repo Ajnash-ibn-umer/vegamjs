@@ -5,6 +5,8 @@
 <!-- [![NPM Version][npm-version-image]][npm-url]
   [![NPM Install Size][npm-install-size-image]][npm-install-size-url]
   [![NPM Downloads][npm-downloads-image]][npm-downloads-url] -->
+
+  > :warning: This package currently in development . there for tis is not suitable for production 
 ## Features
 
 * Flexible and Robust routing
@@ -44,14 +46,28 @@ $ yarn add vegamjs
 ## Examples
 
 ```js
-import  AJN from "ajn-js" 
+import Vegam from "vegamjs";
 
-const app=new AJN()
+
+const app = new Vegam();
+
+// middleware
+app.use((ctx, next) => {
+    console.log("in middleware")
+  next();
+});
+
+//routing
+app.get("/", (ctx) => {
+  const body = ctx.req.body;
+
+  ctx.res.json("hello world!");
+});
+
 
 app.listen(8000,()=>{
-    res.text("hello world")
-})
-
+    console.log(`server listening on 8000`);
+});
 
 
 ```
