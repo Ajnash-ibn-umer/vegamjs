@@ -1,6 +1,6 @@
 {
   "name": "vegamjs",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "lightweight node.js framework",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

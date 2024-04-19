@@ -76,4 +76,35 @@ app.listen(8000,()=>{
 
 ```
 
+### Typescript Example
+```ts
+import Vegam, { Context } from "vegamjs";
 
+
+const app = new Vegam({
+  routerOptions: {
+    caseSensitive: true,
+    ignoreTrailingSlash: true,
+  },
+});
+
+// middleware
+app.use((ctx: Context, next) => {
+  console.log("in middleware");
+  next();
+});
+
+//routing
+app.get("/", (ctx: Context) => {
+  const body = ctx.req.body;
+
+  ctx.res.json("hello world!");
+});
+
+app.listen(8000, () => {
+  console.log(`server listening on ${8000}`);
+});
+
+
+
+```
