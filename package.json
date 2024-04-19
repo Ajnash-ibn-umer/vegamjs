@@ -1,5 +1,5 @@
 {
-  "name": "theejs",
+  "name": "vegam-js",
   "version": "1.0.8",
   "description": "lightweight node.js framework",
   "main": "./dist/index.js",
@@ -43,7 +43,12 @@
     "framework",
     "server",
     "rest",
-    "graphql"
+    "graphql",
+    "web",
+    "app",
+    "http",
+    "application",
+    "router"
   ],
   "bugs": {
     "url": "https://github.com/Ajnash-ibn-umer/ajn.js/issues"
