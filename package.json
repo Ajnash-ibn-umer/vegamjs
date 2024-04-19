@@ -1,6 +1,6 @@
 {
-  "name": "ajn-js",
-  "version": "1.0.6",
+  "name": "vegamjs",
+  "version": "1.0.10",
   "description": "lightweight node.js framework",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -43,7 +43,12 @@
     "framework",
     "server",
     "rest",
-    "graphql"
+    "graphql",
+    "web",
+    "app",
+    "http",
+    "application",
+    "router"
   ],
   "bugs": {
     "url": "https://github.com/Ajnash-ibn-umer/ajn.js/issues"
