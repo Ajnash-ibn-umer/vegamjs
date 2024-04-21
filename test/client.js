@@ -1,6 +1,5 @@
 import app from "../dist/index.js"
-import fileUpload from "express-fileupload";
-
+import cors from "cors"
 const s = new app({
   routerOptions: {
     onBadUrl: (path, req, res) => {
@@ -8,12 +7,18 @@ const s = new app({
       res.end(`Bad path: ${path}`);
     },
   },
+  plugins:[
+cors()
+  ],
+  fileUploadOptions:{
+    tempFileDir:"../"
+  }
 })
 
-s.useExMid((req,res,next) =>{
-  console.log("middleqare 1")
-  next()
-})
+// s.useExMid((req,res,next) =>{
+//   console.log("middleqare 1")
+//   next()
+// })
 s.listen(8001, () => {
   console.log("port running");
 });
@@ -39,7 +44,7 @@ s.get("/test", ({ req, res }) => {
   res.text("2")
 });
 s.post("/query", ({ req, res }) => {
-  console.log("quey files",req.files)
+  console.log("quey files", req.files)
   console.log("quey body",req.body)
 
   res.text("heelow bro")

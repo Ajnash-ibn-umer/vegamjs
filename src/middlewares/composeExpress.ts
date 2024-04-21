@@ -30,7 +30,7 @@ export default  function compose(middleware: any[]) {
       }
       if (!fn) return   Promise.resolve();
       try {
-        console.log("middleware working",i,dispatch)
+        // console.log("middleware working",i,dispatch)
         return  Promise.resolve(fn(req,res, dispatch.bind(null, i + 1)));
       } catch (err) {
         return  Promise.reject(err);

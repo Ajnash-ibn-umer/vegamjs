@@ -12,7 +12,6 @@ import {
   RouterHandler,
 } from "./types";
 import readBody from "./body";
-import bodyParser from "./body-parser";
 import { responseGeneration } from "./response";
 import compose from "./middlewares/compose";
 import bp from "body-parser";
@@ -34,42 +33,58 @@ export default class createApplication extends EventEmitter {
   private middlewareStore: any[] = [];
   private appMiddlewareStore: any[] = [];
 
-  private index = 0;
   private router: findMyWay.Instance<findMyWay.HTTPVersion.V1>;
   constructor(options?: AppConfig) {
     super();
-
     // Create router instance
     this.router =
       options != undefined
-        ? findMyWay(options.routerOptions)
+        ? findMyWay({...options.routerOptions,
+          onBadUrl: (path, req, res) => {
+            res.statusCode = 404;
+            res.end(`Bad path: ${path}`);
+          }})
         : findMyWay({
             ignoreDuplicateSlashes: true,
+            onBadUrl: (path, req, res) => {
+              res.statusCode = 400;
+              res.end(`Bad path: ${path}`);
+            },
           });
-    const _bodyParserFile = fileUpload();
-    const _bodyParserUrl = urlencoded({ extended: true });
-    const _bodyParserJson = json();
-    this.useExMid(_bodyParserFile);
+    if (options) {
 
-    this.useExMid(_bodyParserUrl);
-    this.useExMid(_bodyParserJson);
+      const _bodyParserFile = fileUpload(options.fileUploadOptions ? options.fileUploadOptions : {});
+      const _bodyParserUrl = urlencoded({ extended: true });
+      const _bodyParserJson = json();
+      if (options?.plugins === undefined) {
+        options.plugins = [_bodyParserFile, _bodyParserUrl, _bodyParserJson];
+      } else {
+        options.plugins = [
+          _bodyParserFile,
+          _bodyParserUrl,
+          _bodyParserJson,
+          ...options?.plugins,
+        ];
+      }
+      this.plugins(options?.plugins as any);
 
+    }
     // init server
     this.app = http.createServer(async (_req: any, _res: Response | any) => {
       try {
         responseGeneration.apply(_res);
+        const pluginCallback = composeExpress(this.appMiddlewareStore);
 
-        // const callback2 = compose(this.middlewareStore);
-        // await Promise.resolve(callback2({req:_req,res: _res},null));
-        const cb =  composeExpress(this.appMiddlewareStore);
-       cb(_req, _res, ()=>{
-        this.requestHandler(_req, _res);
-       })
-    
+        const middlewareCallback= compose(this.middlewareStore);
 
-        // call body parser function as callback
-        // bodyParser.call(this.app, _req, _res, async () => {
-        // });
+      
+        pluginCallback(_req, _res,()=>{
+          middlewareCallback({req:_req,res: _res},()=>{
+            this.requestHandler(_req, _res)
+
+          }) 
+        }  );
+      
       } catch (error) {
         console.error(error);
         // handle global errors here
@@ -78,16 +93,15 @@ export default class createApplication extends EventEmitter {
       }
     });
   }
+  requestHandler(_req: http.IncomingMessage | any, _res: Response) {
+    this.router.lookup(_req, _res);
+  }
 
   // Port listening
   listen(port: number, ...args: ListenArgs) {
     this.app.listen(port, ...args);
   }
 
-  requestHandler(_req: http.IncomingMessage | any, _res: Response) {
-    console.log(_req.files)
-    this.router.lookup(_req, _res);
-  }
   use(method: MiddleWareHandler) {
     if (typeof method !== "function") {
       throw "Middleware  must be a function";
@@ -96,7 +110,8 @@ export default class createApplication extends EventEmitter {
 
     return this;
   }
-  useExMid(method: any) {
+  private useExpressMiddleware(method: any) {
+    // console.log(method);
     if (typeof method !== "function") {
       throw "Middleware  must be a function";
     }
@@ -104,6 +119,10 @@ export default class createApplication extends EventEmitter {
 
     return this;
   }
+  private plugins(plugins: any[]) {
+    this.appMiddlewareStore = plugins;
+  }
+
   // method handlers
   get(path: string, handler: RouterHandler) {
     this.router.on(

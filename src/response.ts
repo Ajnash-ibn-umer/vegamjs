@@ -8,7 +8,7 @@ export function responseGeneration() {
   // TODO: status code setter
   try {
     this.text = function (body: any) {
-      console.log(typeof body);
+      // console.log(typeof body);
       if (typeof body === "object") {
         this.json(body);
       } else if (typeof body === "string") {
