@@ -108,3 +108,37 @@ app.listen(8000, () => {
 
 
 ```
+
+### Plugin
+Plugin is a feature to add express middlewares in VegamJs.
+
+
+```ts
+
+import Vegam from "vegamjs";
+import cors from "cors"
+
+const app = new Vegam({
+  plugins:[
+    // add your middlewares here
+    cors()
+  ]
+});
+
+```
+
+
+### FileUpload
+VegamJs has built-in file-upload support by express-file-uploader. if want to customize default configuration you can change by fileUploadOptions field
+```ts
+
+import Vegam from "vegamjs";
+import cors from "cors"
+
+const app = new Vegam({
+ fileUploadOptions:{
+    tempFileDir:"../"
+  }
+});
+
+```
