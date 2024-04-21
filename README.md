@@ -142,3 +142,18 @@ const app = new Vegam({
 });
 
 ```
+### Middlewares
+VegamJs has middleware support .  app.use() method help to create middleware in vegamJs.
+```ts
+
+import Vegam from "vegamjs";
+import cors from "cors"
+
+const app = new Vegam();
+
+app.use((ctx,next)=>{
+  console.log("it is middleware",ctx.req);
+  next()
+})
+
+```
