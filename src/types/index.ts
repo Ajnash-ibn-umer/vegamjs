@@ -3,6 +3,7 @@ export type Request = {
   params: Record<string, any>;
   query: Record<string, any>;
   body: Record<string, any>;
+  files:any[]
 } & http.IncomingMessage;
 
 export type Response = http.ServerResponse<http.IncomingMessage> & {
