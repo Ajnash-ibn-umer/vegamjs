@@ -4,7 +4,7 @@
   
   ![Screenshot 2024-04-26 at 10 33 35 AM](https://github.com/Ajnash-ibn-umer/vegamjs/assets/93277108/ebc35ec7-c8e3-48e5-ad8b-17ff7669d121)
 
-<div>
+</div>
 
   Simple, minimalist web framework for [Node.js](http://nodejs.org).
 
