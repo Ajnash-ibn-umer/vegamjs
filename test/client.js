@@ -10,9 +10,7 @@ const s = new app({
   plugins:[
 cors()
   ],
-  fileUploadOptions:{
-    tempFileDir:"../"
-  }
+
 })
 
 // s.useExMid((req,res,next) =>{
