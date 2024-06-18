@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
-import * as http from "http";
-import findMyWay from "find-my-way";
-import { Handler, HTTPVersion } from "find-my-way";
+import  http from "http";
+
+import  findMyWay from "find-my-way";
 import { supportedMethods } from "./utils/httpMethods";
 import { AppConfig } from "./types/router";
 import {
@@ -19,7 +19,7 @@ const { json, urlencoded } = bp;
 
 import composeExpress from "./middlewares/composeExpress";
 
-import fileUpload from "express-fileupload";
+const fileUpload = require('express-fileupload');
 
 type ListenArgs = any[];
 
@@ -110,6 +110,7 @@ export default class createApplication extends EventEmitter {
 
     return this;
   }
+  
   private useExpressMiddleware(method: any) {
     // console.log(method);
     if (typeof method !== "function") {
