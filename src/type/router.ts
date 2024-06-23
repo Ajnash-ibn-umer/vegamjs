@@ -1,5 +1,5 @@
 import type findMyWay  from 'find-my-way';
-import { PluginHandler } from '.';
+import { PluginHandler } from './index.js';
 
 export type AppConfig={
 routerOptions?:findMyWay.Config<findMyWay.HTTPVersion.V1>,

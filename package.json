@@ -2,13 +2,17 @@
   "name": "vegamjs",
   "version": "1.1.17",
   "description": "lightweight node.js framework",
-  "main": "dist/cjs/index.js",
   "type": "module",
-  "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=14.17"
+  },
   "scripts": {
     "test": "jest",
     "build": "tsx build.ts",
@@ -28,19 +32,24 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
-    "tsup": "^8.0.2"
+    "tsup": "^8.0.2",
+    "glob": "^10.4.2",
+    "rmrf": "^2.0.4",
+    "tsx": "^4.15.7",
+    "esbuild": "^0.21.5",
+
   },
   "dependencies": {
     "body-parser": "^1.20.2",
-    "esbuild": "^0.21.5",
     "express-fileupload": "^1.5.0",
     "find-my-way": "^8.1.0",
-    "glob": "^10.4.2",
-    "rmrf": "^2.0.4",
-    "tsx": "^4.15.7"
+   
   },
   "directories": {
     "test": "test"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
