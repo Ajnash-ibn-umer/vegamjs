@@ -1,4 +1,4 @@
-import { Context } from "../types";
+import { Context } from "../type";
 
 export default  function compose(middleware: any[]) {
   if (!Array.isArray(middleware))

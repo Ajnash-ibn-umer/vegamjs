@@ -1,25 +1,28 @@
 import { EventEmitter } from "events";
-import  http from "http";
+import type {EventEmitter as E} from "events";
 
-import  findMyWay from "find-my-way";
+import * as http from "http";
+import findMyWay from "find-my-way";
 import { supportedMethods } from "./utils/httpMethods";
-import { AppConfig } from "./types/router";
+import { AppConfig } from "./type/router";
 import {
   Context,
   MiddleWareHandler,
   Request,
   Response,
   RouterHandler,
-} from "./types";
+} from "./type";
 import readBody from "./body";
 import { responseGeneration } from "./response";
 import compose from "./middlewares/compose";
 import bp from "body-parser";
 const { json, urlencoded } = bp;
 
+
+
 import composeExpress from "./middlewares/composeExpress";
 
-const fileUpload = require('express-fileupload');
+import  fileUpload from 'express-fileupload'
 
 type ListenArgs = any[];
 
@@ -28,7 +31,7 @@ type ListenArgs = any[];
  *
  *@param {AppConfig}
  */
-export default class createApplication extends EventEmitter {
+export default class CreateApp<E> extends EventEmitter {
   private readonly app: any;
   private middlewareStore: any[] = [];
   private appMiddlewareStore: any[] = [];
