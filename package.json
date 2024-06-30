@@ -36,7 +36,7 @@
     "glob": "^10.4.2",
     "rmrf": "^2.0.4",
     "tsx": "^4.15.7",
-    "esbuild": "^0.21.5",
+    "esbuild": "^0.21.5"
 
   },
   "dependencies": {

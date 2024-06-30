@@ -1,7 +1,7 @@
 # Vegam
 
 <div align="center">
-  
+
   ![Screenshot 2024-04-26 at 10 33 35 AM](https://github.com/Ajnash-ibn-umer/vegamjs/assets/93277108/ebc35ec7-c8e3-48e5-ad8b-17ff7669d121)
 
 </div>
@@ -12,10 +12,8 @@
   [![NPM Install Size][npm-install-size-image]][npm-install-size-url]
   [![NPM Downloads][npm-downloads-image]][npm-downloads-url] -->
 
-
-
 > ⚠️ **Note:** This package is currently in active development and is not yet suitable for production use. It may undergo significant changes, and features are subject to modification. Use it at your own discretion for testing and development purposes only. Contributions and feedback are welcome!
- 
+
 ## Features
 
 * Flexible and Robust routing
@@ -23,7 +21,6 @@
 * Built-in body parser support
 * Built-in typescript support
 * middleware support
-
 
 ## Installation
 
@@ -44,14 +41,10 @@ Installation is done using the
 Using npm:
 
 ```console
-$ npm install vegamjs
+$ npx create-vegam-app
 ```
 
-Using yarn:
 
-```console
-$ yarn add vegamjs
-```
 
 ## Examples
 
@@ -83,6 +76,7 @@ app.listen(8000,()=>{
 ```
 
 ### Typescript Example
+
 ```ts
 import Vegam, { Context } from "vegamjs";
 
@@ -116,8 +110,8 @@ app.listen(8000, () => {
 ```
 
 ### Plugin
-Plugin is a feature to add express middlewares in VegamJs.
 
+Plugin is a feature to add express middlewares in VegamJs.
 
 ```ts
 
@@ -133,9 +127,10 @@ const app = new Vegam({
 
 ```
 
-
 ### FileUpload
+
 VegamJs has built-in file-upload support by express-file-uploader. if want to customize default configuration you can change by fileUploadOptions field
+
 ```ts
 
 import Vegam from "vegamjs";
@@ -148,8 +143,11 @@ const app = new Vegam({
 });
 
 ```
+
 ### Middlewares
+
 VegamJs has middleware support .  app.use() method help to create middleware in vegamJs.
+
 ```ts
 
 import Vegam from "vegamjs";
