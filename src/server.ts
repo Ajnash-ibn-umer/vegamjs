@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import type {EventEmitter as E} from "events";
+import type { EventEmitter as E } from "events";
 
 import * as http from "http";
 import findMyWay from "find-my-way";
@@ -12,17 +12,13 @@ import {
   Response,
   RouterHandler,
 } from "./type";
-import readBody from "./body";
 import { responseGeneration } from "./response";
 import compose from "./middlewares/compose";
-import bp from "body-parser";
-const { json, urlencoded } = bp;
-
-
 
 import composeExpress from "./middlewares/composeExpress";
 
-import  fileUpload from 'express-fileupload'
+import fileUpload from "express-fileupload";
+import handleRequest from "./handleRequest";
 
 type ListenArgs = any[];
 
@@ -42,11 +38,13 @@ export default class CreateApp<E> extends EventEmitter {
     // Create router instance
     this.router =
       options != undefined
-        ? findMyWay({...options.routerOptions,
-          onBadUrl: (path, req, res) => {
-            res.statusCode = 404;
-            res.end(`Bad path: ${path}`);
-          }})
+        ? findMyWay({
+            ...options.routerOptions,
+            onBadUrl: (path, req, res) => {
+              res.statusCode = 404;
+              res.end(`Bad path: ${path}`);
+            },
+          })
         : findMyWay({
             ignoreDuplicateSlashes: true,
             onBadUrl: (path, req, res) => {
@@ -54,40 +52,43 @@ export default class CreateApp<E> extends EventEmitter {
               res.end(`Bad path: ${path}`);
             },
           });
+
+
+
+
+
+
+
     if (options) {
+      const _bodyParserFile = fileUpload(
+        options.fileUploadOptions ? options.fileUploadOptions : {}
+      );
+      options.plugins = [_bodyParserFile];
 
-      const _bodyParserFile = fileUpload(options.fileUploadOptions ? options.fileUploadOptions : {});
-      const _bodyParserUrl = urlencoded({ extended: true });
-      const _bodyParserJson = json();
-      if (options?.plugins === undefined) {
-        options.plugins = [_bodyParserFile, _bodyParserUrl, _bodyParserJson];
-      } else {
-        options.plugins = [
-          _bodyParserFile,
-          _bodyParserUrl,
-          _bodyParserJson,
-          ...options?.plugins,
-        ];
+      if (options?.plugins !== undefined) {
+        options.plugins.push(...options?.plugins);
       }
-      this.plugins(options?.plugins as any);
 
+      this.plugins(options?.plugins as Function[]);
     }
+
+
+
+
     // init server
     this.app = http.createServer(async (_req: any, _res: Response | any) => {
       try {
+        console.log("server");
         responseGeneration.apply(_res);
         const pluginCallback = composeExpress(this.appMiddlewareStore);
 
-        const middlewareCallback= compose(this.middlewareStore);
+        const middlewareCallback = compose(this.middlewareStore);
 
-      
-        pluginCallback(_req, _res,()=>{
-          middlewareCallback({req:_req,res: _res},()=>{
-            this.requestHandler(_req, _res)
-
-          }) 
-        }  );
-      
+        pluginCallback(_req, _res, () => {
+          middlewareCallback({ req: _req, res: _res }, () => {
+            handleRequest.apply(this, [_req, _res]);
+          });
+        });
       } catch (error) {
         console.error(error);
         // handle global errors here
@@ -96,10 +97,9 @@ export default class CreateApp<E> extends EventEmitter {
       }
     });
   }
-  requestHandler(_req: http.IncomingMessage | any, _res: Response) {
-    this.router.lookup(_req, _res);
-  }
 
+
+  
   // Port listening
   listen(port: number, ...args: ListenArgs) {
     this.app.listen(port, ...args);
@@ -113,7 +113,7 @@ export default class CreateApp<E> extends EventEmitter {
 
     return this;
   }
-  
+
   private useExpressMiddleware(method: any) {
     // console.log(method);
     if (typeof method !== "function") {
@@ -123,7 +123,7 @@ export default class CreateApp<E> extends EventEmitter {
 
     return this;
   }
-  private plugins(plugins: any[]) {
+  private plugins(plugins: Function[]) {
     this.appMiddlewareStore = plugins;
   }
 
