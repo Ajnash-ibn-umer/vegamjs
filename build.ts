@@ -54,7 +54,7 @@ const commonOptions: BuildOptions = {
   entryPoints,
   logLevel: 'info',
   platform: 'node',
-  // drop:["console","debugger"]
+  drop:["console","debugger"]
 }
 
 const cjsBuild = () =>
