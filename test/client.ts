@@ -1,5 +1,6 @@
-import app from "../dist/index.js"
-const s = new app({
+import {Vegam} from "../dist/index.js"
+
+const s = new Vegam({
   routerOptions: {
     onBadUrl: (path, req, res) => {
       res.statusCode = 400;

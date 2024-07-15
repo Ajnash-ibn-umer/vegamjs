@@ -1,6 +1,6 @@
 {
   "name": "vegamjs",
-  "version": "1.1.18",
+  "version": "1.1.20",
   "description": "lightweight node.js framework",
   "type": "module",
   "types": "dist/types/index.d.ts",
@@ -28,22 +28,20 @@
     "@types/methods": "^1.1.4",
     "@types/node": "^20.12.3",
     "@types/route-parser": "^0.1.7",
+    "esbuild": "^0.21.5",
+    "glob": "^10.4.2",
     "jest": "^29.7.0",
+    "rmrf": "^2.0.4",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
     "tsup": "^8.0.2",
-    "glob": "^10.4.2",
-    "rmrf": "^2.0.4",
-    "tsx": "^4.15.7",
-    "esbuild": "^0.21.5"
-
+    "tsx": "^4.16.0"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
     "express-fileupload": "^1.5.0",
     "find-my-way": "^8.1.0"
-   
   },
   "directories": {
     "test": "test"

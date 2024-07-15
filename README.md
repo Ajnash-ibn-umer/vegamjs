@@ -44,41 +44,11 @@ Using npm:
 $ npx create-vegam-app
 ```
 
-
-
 ## Examples
 
-```js
-import Vegam from "vegamjs";
-
-
-const app = new Vegam();
-
-// middleware
-app.use((ctx, next) => {
-    console.log("in middleware")
-  next();
-});
-
-//routing
-app.get("/", (ctx) => {
-  const body = ctx.req.body;
-
-  ctx.res.json("hello world!");
-});
-
-
-app.listen(8000,()=>{
-    console.log(`server listening on 8000`);
-});
-
-
-```
-
-### Typescript Example
 
 ```ts
-import Vegam, { Context } from "vegamjs";
+import  { Vegam,Context } from "vegamjs";
 
 
 const app = new Vegam({
