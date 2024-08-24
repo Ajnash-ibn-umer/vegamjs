@@ -146,7 +146,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ajnash-ibn-umer"><img src="https://avatars.githubusercontent.com/u/62911231?v=4?s=100" width="100px;" alt="Ajnash_ibn_umer"/><br /><sub><b>Ajnash_ibn_umer</b></sub></a><br /><a href="https://github.com/Ajnash-ibn-umer/vegamjs/commits?author=Ajnash-ibn-umer" title="Code">💻</a> <a href="https://github.com/Ajnash-ibn-umer/vegamjs/commits?author=Ajnash-ibn-umer" title="Documentation">📖</a> <a href="#data-Ajnash-ibn-umer" title="Data">🔣</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://shyamjith.in/"><img src="https://avatars.githubusercontent.com/u/93277108?v=4?s=100" width="100px;" alt="Shyamjith"/><br /><sub><b>Shyamjith</b></sub></a><br /><a href="https://github.com/Ajnash-ibn-umer/vegamjs/commits?author=shyamexe" title="Code">💻</a> <a href="https://github.com/Ajnash-ibn-umer/vegamjs/commits?author=shyamexe" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://shyamjith.in/"><img src="https://avatars.githubusercontent.com/u/93277108?v=4?s=100" width="100px;" alt="Shyamjith"/><br /><sub><b>Shyamjith</b></sub></a><br /><a href="https://github.com/Ajnash-ibn-umer/vegamjs/commits?author=shyamexe" title="Code">💻</a> <a href="https://github.com/Ajnash-ibn-umer/vegamjs/commits?author=shyamexe" title="Documentation">📖</a> <a href="#data-shyamexe" title="Data">🔣</a></td>
     </tr>
   </tbody>
 </table>
