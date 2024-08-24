@@ -1,0 +1,28 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Ajnash-ibn-umer",
+      "name": "Ajnash_ibn_umer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62911231?v=4",
+      "profile": "https://github.com/Ajnash-ibn-umer",
+      "contributions": [
+        "code",
+        "doc",
+        "data"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "vegamjs",
+  "projectOwner": "Ajnash-ibn-umer"
+}
